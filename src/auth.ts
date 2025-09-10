@@ -1,0 +1,66 @@
+import GoogleProvider from "next-auth/providers/google";
+import type { NextAuthOptions } from "next-auth";
+import { env } from "@/lib/env"
+import dbConnect from "@/lib/dbConnect";
+import UserModel from "./app/models/user.model";
+
+export const authOptions: NextAuthOptions = {
+    debug: true,
+    providers:[
+        GoogleProvider({
+            clientId: env.GOOGLE_CLIENT_ID,
+            clientSecret: env.GOOGLE_CLIENT_SECRET,
+        })
+    ],
+    secret: env.AUTH_SECRET,
+    pages: {
+        signIn: '/api/auth/signin',
+        error: '/api/auth/error',
+    },
+
+    session: { strategy: "jwt" },
+
+    callbacks: {
+        async signIn({ user }) {
+            
+            try {
+                await dbConnect()
+
+                const existingUser = await UserModel.findOne({ email: user.email })
+                if (!existingUser) {
+                    await UserModel.create({
+                        username: user.name,
+                        email: user.email,
+                        isVerified: true,
+                        socialHandles: { accounts: [] },
+                        frequency: "daily"
+                    })
+                }
+
+                return true;
+            } catch (error) {
+                console.error('SignIn callback error:', error);
+                // Allow sign in even if database operations fail
+                return true;
+            }
+        },
+
+        async jwt({ token, account }) {
+
+            if (account) {
+                token.accessToken = account.access_token;
+                token.refreshToken = account.refresh_token;
+                token.expiresAt = Date.now() + (account.expires_in as number) * 1000;
+            }
+            return token;
+        },
+
+        async session({ session, token }) {
+            
+            session.user = session.user || {};
+            session.accessToken = token.accessToken as string;
+            return session;
+        }
+    }
+
+}
