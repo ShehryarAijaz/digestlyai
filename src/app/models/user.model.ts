@@ -15,7 +15,7 @@ const SocialHandlesSchema: mongoose.Schema<SocialHandles> = new mongoose.Schema(
 export interface User extends Document {
     username: string;
     email: string;
-    password: string;
+    password?: string; // Optional for OAuth users
     isVerified: boolean;
     socialHandles: SocialHandles[];
     frequency: 'daily' | 'weekly' | 'monthly';
@@ -33,7 +33,7 @@ const userSchema: mongoose.Schema<User> = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        required: false, // Not required for OAuth users
     },
     isVerified: {
         type: Boolean,
