@@ -3,8 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
 import { Input } from "@/components/ui/input";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "sonner"
 import { MdModeEdit } from "react-icons/md";
 import EmailPreview from "@/components/EmailPreview";
