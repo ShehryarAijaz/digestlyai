@@ -17,7 +17,7 @@ export interface User extends Document {
     email: string;
     password?: string; // Optional for OAuth users
     isVerified: boolean;
-    socialHandles: SocialHandles[];
+    socialHandles: SocialHandles;
     frequency: 'daily' | 'weekly' | 'monthly';
 }
 
