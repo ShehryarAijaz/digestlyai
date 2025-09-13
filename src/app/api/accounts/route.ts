@@ -23,11 +23,26 @@ export async function POST(request: Request) {
 
     const { account1, account2, account3 } = await request.json()
 
+    console.log("accountsToAdd", account1, account2, account3)
+
+    const accountsToAdd = [account1, account2, account3].map(account => account.replace(/\s+/g, "")).filter(Boolean);
+
+    console.log("accountsToAdd", accountsToAdd)
+
     try {
 
-        const getUser = await UserModel.findOne({ email: user.email })
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { email: user.email },
+            { $set:
+                { "socialHandles.accounts": accountsToAdd
+                }
+            },
+            { new: true, upsert: false }
+        );
 
-        if (!getUser) {
+        console.log("updatedUser", updatedUser)
+
+        if (!updatedUser) {
             return Response.json({
                 success: false,
                 message: "User not found"
@@ -37,18 +52,10 @@ export async function POST(request: Request) {
             })
         }
 
-        const accountsToAdd = [account1, account2, account3].filter(Boolean);
-        
-        getUser.socialHandles.accounts.push(
-        ...accountsToAdd.filter(acc => !getUser.socialHandles.accounts.includes(acc))
-        );
-
-        await getUser.save();
-
         return Response.json({
             success: true,
             message: "Accounts added successfully",
-            user: getUser
+            user: updatedUser
         },
         {
             status: 200
@@ -64,3 +71,43 @@ export async function POST(request: Request) {
         })
     }
 };
+
+export async function GET() {
+    await dbConnect();
+
+    const session = await getServerSession(authOptions)
+
+    if (!session || !session.user) {
+        return Response.json({
+            success: false,
+            message: "Unauthorized"
+        },
+        {
+            status: 401
+        })
+    }
+
+    const user = session.user as User
+
+    const userDetails = await UserModel.findOne({ email: user.email })
+
+    if (!userDetails) {
+        return Response.json({
+            success: false,
+            message: "User not found"
+        },
+        {
+            status: 401
+        })
+    }
+
+    return Response.json({
+        success: true,
+        message: "User details fetched successfully",
+        user: userDetails
+    },
+    {
+        status: 200
+    })
+
+}
