@@ -1,13 +1,35 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Button } from './ui/button'
-import { useSession } from 'next-auth/react'
+import { toast } from 'sonner'
+import axios from 'axios'
 
 const Schedule = ({ frequency, setFrequency }: { frequency: string, setFrequency: (frequency: string) => void }) => {
+    const isInitialLoad = useRef(true)
 
-    const { data: session } = useSession()
+    useEffect(() => {
+      // Skip API call on initial load
+      if (isInitialLoad.current) {
+        isInitialLoad.current = false
+        return
+      }
+
+      const updateFrequency = async () => {
+        try {
+          const response = await axios.post(`/api/frequency`, { frequency })
+          if (response.data.success) {
+            toast.success(response.data.message)
+          } else {
+            toast.error(response.data.message)
+          }
+        } catch (error) {
+          toast.error("Error updating frequency")
+        } 
+      }
+      updateFrequency()
+    }, [frequency])
 
   return (
     <>
@@ -17,7 +39,7 @@ const Schedule = ({ frequency, setFrequency }: { frequency: string, setFrequency
         <div className="mt-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button type="submit" variant="outline">{frequency || "Set Frequency"}</Button>
+            <Button className="cursor-pointer" type="submit" variant="outline">{frequency || "Set Frequency"}</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuItem onClick={() => setFrequency("Daily")}>Daily</DropdownMenuItem>
