@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 import React from 'react'
 
-const EmailPreview = () => {
+const EmailPreview = ({ accounts }: {accounts: { [key: string]: string }}) => {
   const { data: session } = useSession()
 
   return (
@@ -11,77 +11,94 @@ const EmailPreview = () => {
     <div className="mt-8 border-b pb-5">
         <h3 className="text-2xl font-semibold tracking-tight">Email Preview</h3>
         <p className="leading-7 [&:not(:first-child)]:mt-1 text-muted-foreground">Here&apos;s a preview of what your email digest will look like</p>
-        <div className="mt-4 max-w-lg rounded-lg shadow-lg border bg-white dark:bg-zinc-900 overflow-hidden">
-          {/* Email Header */}
-          <div className="flex items-center justify-between px-6 py-4 border-b bg-gray-50 dark:bg-zinc-800">
-            <div className="flex items-center gap-3">
-              <img
-                src={session?.user?.image || "/avatar-placeholder.png"}
-                alt="Sender"
-                className="h-10 w-10 rounded-full border"
-              />
-              <div>
-                <div className="font-semibold text-gray-900 dark:text-white">
-                  {session?.user?.name || "Your Name"}
+        
+        {/* Gmail-style Email Mockup */}
+        <div className="mt-6 max-w-2xl mx-auto">
+          <div className="bg-white dark:bg-zinc-900 rounded-lg shadow-lg border border-gray-200 dark:border-zinc-700 overflow-hidden">
+            
+            {/* Gmail Header */}
+            <div className="bg-gray-50 dark:bg-zinc-800 px-4 py-3 border-b border-gray-200 dark:border-zinc-700">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center">
+                    <span className="text-white text-sm font-bold">E</span>
+                  </div>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Email Digest</span>
                 </div>
-                <div className="text-xs text-gray-500 dark:text-gray-400">
-                  {session?.user?.email || "you@email.com"}
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  {new Date().toLocaleDateString()}
+                </span>
+              </div>
+            </div>
+
+            {/* Subject Line */}
+            <div className="px-4 py-3 border-b border-gray-200 dark:border-zinc-700">
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Your Daily Social Media Digest
+              </h2>
+            </div>
+
+            {/* Email Body */}
+            <div className="px-4 py-4 space-y-4">
+              
+              {/* Account 1 */}
+              <div className="border-l-4 border-blue-500 pl-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-6 w-6 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center">
+                    <span className="text-blue-600 dark:text-blue-400 text-xs font-bold">@</span>
+                  </div>
+                  <span className="font-medium text-gray-900 dark:text-white text-sm">@{accounts.account1}</span>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  "Just shipped a new feature that's going to revolutionize how developers work with APIs. The response has been incredible! 🚀"
+                </p>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  💬 24 comments • ❤️ 156 likes • 🔄 12 retweets
                 </div>
               </div>
-            </div>
-            <div className="text-xs text-gray-400 dark:text-gray-500">
-              {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-            </div>
-          </div>
-          {/* Subject */}
-          <div className="px-6 py-3 border-b">
-            <div className="text-lg font-semibold text-gray-900 dark:text-white">
-              Your Daily Digest
-            </div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Here’s what’s new from your selected accounts
-            </div>
-          </div>
-          {/* Email Body */}
-          <div className="px-6 py-4 bg-white dark:bg-zinc-900">
-            <div className="mb-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="inline-block h-8 w-8 rounded-full bg-gray-200 dark:bg-zinc-700"></span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">
-                  Account 1
-                </span>
+
+              {/* Account 2 */}
+              <div className="border-l-4 border-green-500 pl-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-6 w-6 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                    <span className="text-green-600 dark:text-green-400 text-xs font-bold">@</span>
+                  </div>
+                  <span className="font-medium text-gray-900 dark:text-white text-sm">@{accounts.account2}</span>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  "New design system components are live! Clean, accessible, and beautiful. Can't wait to see what you build with them ✨"
+                </p>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  💬 18 comments • ❤️ 89 likes • 🔄 7 retweets
+                </div>
               </div>
-              <div className="ml-10 text-gray-700 dark:text-gray-300 text-sm">
-                • New post: <span className="font-semibold">"How to boost productivity in 2024"</span>
+
+              {/* Account 3 */}
+              <div className="border-l-4 border-purple-500 pl-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="h-6 w-6 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
+                    <span className="text-purple-600 dark:text-purple-400 text-xs font-bold">@</span>
+                  </div>
+                  <span className="font-medium text-gray-900 dark:text-white text-sm">@{accounts.account3}</span>
+                </div>
+                <p className="text-gray-700 dark:text-gray-300 text-sm">
+                  "Mentioned you in a comment: 'This is exactly what the industry needed! Brilliant execution 👏'"
+                </p>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  💬 5 comments • ❤️ 23 likes • 🔄 3 retweets
+                </div>
               </div>
+
             </div>
-            <div className="mb-4">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="inline-block h-8 w-8 rounded-full bg-gray-200 dark:bg-zinc-700"></span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">
-                  Account 2
-                </span>
-              </div>
-              <div className="ml-10 text-gray-700 dark:text-gray-300 text-sm">
-                • New follower: <span className="font-semibold">Jane Doe</span>
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="inline-block h-8 w-8 rounded-full bg-gray-200 dark:bg-zinc-700"></span>
-                <span className="font-medium text-gray-800 dark:text-gray-200">
-                  Account 3
-                </span>
-              </div>
-              <div className="ml-10 text-gray-700 dark:text-gray-300 text-sm">
-                • Mentioned you in a comment: <span className="italic">"Great insights, thanks for sharing!"</span>
+
+            {/* Footer */}
+            <div className="bg-gray-50 dark:bg-zinc-800 px-4 py-3 border-t border-gray-200 dark:border-zinc-700">
+              <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
+                <span>Email Digest • {session?.user?.email || "you@example.com"}</span>
+                <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline">Unsubscribe</a>
               </div>
             </div>
-          </div>
-          {/* Email Footer */}
-          <div className="px-6 py-3 border-t bg-gray-50 dark:bg-zinc-800 flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
-            <span>Sent by Email Digest</span>
-            <a href="#" className="text-blue-600 dark:text-blue-400 hover:underline">Unsubscribe</a>
+
           </div>
         </div>
       </div>
