@@ -14,8 +14,7 @@ export const authOptions: NextAuthOptions = {
     ],
     secret: env.AUTH_SECRET,
     pages: {
-        signIn: '/api/auth/signin',
-        error: '/api/auth/error',
+        signIn: '/login',
     },
 
     session: { strategy: "jwt" },
@@ -35,6 +34,9 @@ export const authOptions: NextAuthOptions = {
                         socialHandles: { accounts: [] },
                         frequency: "daily"
                     })
+                    console.log('New user created:', user.email);
+                } else {
+                    console.log('Existing user found:', user.email);
                 }
 
                 return true;
