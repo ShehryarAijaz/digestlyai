@@ -90,7 +90,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center max-w-4xl mx-auto px-6 py-10">
       <div className="border-b pb-2">
-        <h1 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">Hey {session?.user?.name}, ready to setup your email digest?</h1>
+        <h1 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">Hey {session?.user ? session?.user?.name : "Anonymous"}, ready to setup your email digest?</h1>
         <p className="text-muted-foreground text-xl">Pick your accounts, choose schedule, and we&apos;ll handle the rest!</p>
       </div>
 
