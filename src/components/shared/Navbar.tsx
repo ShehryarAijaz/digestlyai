@@ -34,7 +34,7 @@ const Navbar = () => {
       <div className='flex justify-between items-center max-w-7xl mx-auto px-6 py-3'>
         <Link href="/" className='hover:opacity-80 transition'><BWMark /></Link>
         {session ? (
-          <div className="flex items-center gap-3">      
+          <div className="flex items-center gap-3">  
             <Popover>
               <PopoverTrigger asChild>
                 <img src={session?.user?.image as string} alt="User" className='h-8 w-8 rounded-full cursor-pointer hover:opacity-80 transition-all duration-300' />
@@ -46,7 +46,7 @@ const Navbar = () => {
 
                   <Button 
                     onClick={() => signOut({ callbackUrl: '/login' })} 
-                    className='bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 rounded-full cursor-pointer'
+                    className='bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 rounded-full cursor-pointer hover:opacity-80 transition-all duration-300'
                   >
                     Logout
                   </Button>

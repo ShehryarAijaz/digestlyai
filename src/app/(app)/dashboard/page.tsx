@@ -23,18 +23,13 @@ export default function Home() {
   const [frequency, setFrequency] = useState<string>("Daily");
   const [topTweets, setTopTweets] = useState<boolean>(false);
   const [aiSummaries, setAiSummaries] = useState<boolean>(false);
-  
-  console.log(frequency)
-
   const [addButtonClicked, setAddButtonClicked] = useState<boolean>(false);
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
       const response = await axios.get('/api/accounts')
       if (response.data.success) {
-        console.log("response.data.user", response.data.user)
         setAccounts({
           account1: response.data.user.socialHandles.accounts[0],
           account2: response.data.user.socialHandles.accounts[1],
@@ -58,13 +53,11 @@ export default function Home() {
   };
 
   const handleSavePreferences = async () => {
-    console.log("Saving preferences...", accounts, frequency, topTweets);
-    // Add your save logic here
+    // Feature to be added later
   };
 
   const handleAddButtonClick = async () => {
     if (Object.values(accounts).includes("")) {
-      console.log("button clicked..");
       setAddButtonClicked(false);
       toast.error("Please add all accounts before clicking add");
     } else {
