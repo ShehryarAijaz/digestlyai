@@ -1,6 +1,6 @@
 import { google } from '@ai-sdk/google';
 import { generateText } from 'ai';
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { env } from '@/lib/env';
 
 interface Repo {
