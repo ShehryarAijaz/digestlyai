@@ -8,7 +8,6 @@ const trendingRepoSchema = z.object({
     per_page: githubSchema.shape.per_page
 })
 
-
 export async function GET(request: Request) {
 
     // https://api.github.com/search/repositories?q=created:>2025-09-16&sort=stars&order=desc&per_page=10
