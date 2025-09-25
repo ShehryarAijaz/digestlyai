@@ -15,6 +15,7 @@ export const envSchema = z.object({
     EMAIL_SERVER_PORT: z.string(),
     EMAIL_FROM: z.string(),
     DEV_NEWS_API_KEY: z.string(),
+    NEXT_PUBLIC_API_URL: z.string(),
 });
 
 export const env = envSchema.parse(process.env);
