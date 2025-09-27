@@ -2,7 +2,7 @@ import GoogleProvider from "next-auth/providers/google";
 import type { NextAuthOptions } from "next-auth";
 import { env } from "@/lib/env"
 import dbConnect from "@/lib/dbConnect";
-import UserModel from "./app/models/user.model";
+import UserModel from "./models/user.model";
 import EmailProvider from 'next-auth/providers/email';
 import nodemailer from 'nodemailer';
 
@@ -44,8 +44,7 @@ export const authOptions: NextAuthOptions = {
                         username: user.name,
                         email: user.email,
                         isVerified: true,
-                        socialHandles: { accounts: [] },
-                        frequency: "daily"
+                        frequency: "daily",
                     })
                     console.log('New user created:', user.email);
                 } else {
