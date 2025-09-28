@@ -1,4 +1,4 @@
-import z, { date } from "zod";
+import z from "zod";
 
 export const githubSchema = z.object({
     pushed: z.string().refine(

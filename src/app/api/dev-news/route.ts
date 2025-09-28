@@ -1,6 +1,17 @@
 import { z } from "zod";
 import { devNewsSchema } from "@/schema/devNews.schema";
 
+interface News {
+    user: {
+        username: string,
+        github_username: string,
+    }
+    title: string,
+    description: string,
+    url: string,
+    published_at: string
+}
+
 const devToNewsSchema = z.object({
     top: devNewsSchema.shape.top,
     per_page: devNewsSchema.shape.per_page
@@ -53,7 +64,7 @@ export async function GET(request: Request) {
     
         const data = await response.json();
         
-        const devNews = data.map((news: any) => ({
+        const devNews = data.map((news: News) => ({
             username: news.user.username,
             github_username: news.user.github_username,
             title: news.title,
@@ -68,12 +79,11 @@ export async function GET(request: Request) {
             data: devNews
         })
 
-    } catch (error) {
+    } catch {
         return Response.json(
         {
             success: false,
             message: "Failed to fetch repositories",
-            error: error
         },
         {
             status: 500,

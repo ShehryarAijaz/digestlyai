@@ -50,7 +50,7 @@ const EmailPreview = ({ accounts }: {accounts: { [key: string]: string }}) => {
                   <span className="font-medium text-gray-900 dark:text-white text-sm">@{accounts.account1}</span>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  "Just shipped a new feature that's going to revolutionize how developers work with APIs. The response has been incredible! 🚀"
+                &apos;Just shipped a new feature that&apos;s going to revolutionize how developers work with APIs. The response has been incredible! 🚀&apos;
                 </p>
                 <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   💬 24 comments • ❤️ 156 likes • 🔄 12 retweets
@@ -66,7 +66,7 @@ const EmailPreview = ({ accounts }: {accounts: { [key: string]: string }}) => {
                   <span className="font-medium text-gray-900 dark:text-white text-sm">@{accounts.account2}</span>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  "New design system components are live! Clean, accessible, and beautiful. Can't wait to see what you build with them ✨"
+                  &apos;New design system components are live! Clean, accessible, and beautiful. Can&apos;t wait to see what you build with them ✨&apos;
                 </p>
                 <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   💬 18 comments • ❤️ 89 likes • 🔄 7 retweets
@@ -82,7 +82,7 @@ const EmailPreview = ({ accounts }: {accounts: { [key: string]: string }}) => {
                   <span className="font-medium text-gray-900 dark:text-white text-sm">@{accounts.account3}</span>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 text-sm">
-                  "Mentioned you in a comment: 'This is exactly what the industry needed! Brilliant execution 👏'"
+                  &apos;Mentioned you in a comment: &apos;This is exactly what the industry needed! Brilliant execution 👏&apos;&apos;
                 </p>
                 <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   💬 5 comments • ❤️ 23 likes • 🔄 3 retweets

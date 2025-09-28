@@ -3,8 +3,6 @@ import type { NextAuthOptions } from "next-auth";
 import { env } from "@/lib/env"
 import dbConnect from "@/lib/dbConnect";
 import UserModel from "./models/user.model";
-import EmailProvider from 'next-auth/providers/email';
-import nodemailer from 'nodemailer';
 
 export const authOptions: NextAuthOptions = {
     debug: true,

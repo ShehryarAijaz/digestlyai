@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import Link from 'next/link'
-import { useSession, signOut, signIn } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { ThemeModeToggle } from '@/components/shared/ThemeModeToggle'
 import {
@@ -9,6 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import Image from 'next/image'
 
 function BWMark() {
   return (
@@ -37,7 +38,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3">  
             <Popover>
               <PopoverTrigger asChild>
-                <img src={session?.user?.image as string} alt="User" className='h-8 w-8 rounded-full cursor-pointer hover:opacity-80 transition-all duration-300' />
+                <Image src={session?.user?.image as string} alt="User" className='h-8 w-8 rounded-full cursor-pointer hover:opacity-80 transition-all duration-300' />
               </PopoverTrigger>
               <PopoverContent className="w-56">
                 <div className="p-2 flex flex-col">

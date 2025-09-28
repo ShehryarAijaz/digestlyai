@@ -1,6 +1,13 @@
 import { z } from "zod";
 import { githubSchema } from "@/schema/github.schema";
 
+interface Repo {
+    full_name: string;
+    html_url: string;
+    stargazers_count: number;
+    description: string;
+}
+
 const trendingRepoSchema = z.object({
     pushed: githubSchema.shape.pushed,
     sort: githubSchema.shape.sort,
@@ -57,7 +64,7 @@ export async function GET(request: Request) {
     
         const data = await response.json();
         
-        const repos = data.items.map((repo: any) => ({
+        const repos = data.items.map((repo: Repo) => ({
             name: repo.full_name,
             url: repo.html_url,
             stars: repo.stargazers_count,
@@ -70,12 +77,11 @@ export async function GET(request: Request) {
             data: repos
         })
 
-    } catch (error) {
+    } catch {
         return Response.json(
         {
             success: false,
             message: "Failed to fetch repositories",
-            error: error
         },
         {
             status: 500,

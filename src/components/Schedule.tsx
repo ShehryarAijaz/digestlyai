@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui/dropdown-menu'
 import { Button } from './ui/button'
 import { toast } from 'sonner'
@@ -24,7 +24,7 @@ const Schedule = ({ frequency, setFrequency }: { frequency: string, setFrequency
           } else {
             toast.error(response.data.message)
           }
-        } catch (error) {
+        } catch {
           toast.error("Error updating frequency")
         } 
       }

@@ -33,7 +33,7 @@ const LoginPage = () => {
       <div className="relative z-10 flex flex-col gap-1 justify-center items-center px-4 sm:px-6">
         <h1 className="effect-font-styling text-[28px] sm:text-[32px] leading-[30px] sm:leading-[34px] tracking-[-0.045rem] text-gray-10 font-bold mt-6 font-display text-balance text-center">Log in to your account</h1>
         <span className="mt-1 text-sm sm:text-md text-gray-10 font-normal text-balance text-center">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/signup" className="text-gray-10 font-semibold hover:text-gray-700 transition-colors">Sign up.</Link>
         </span>
         <Button

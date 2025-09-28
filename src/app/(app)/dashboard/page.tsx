@@ -11,6 +11,7 @@ import Schedule from "@/components/Schedule";
 import Settings from "@/components/Settings";
 import Footer from "@/components/Footer";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
 
 export default function Home() {
   const { data: session } = useSession();
@@ -52,10 +53,6 @@ export default function Home() {
     }));
   };
 
-  const handleSavePreferences = async () => {
-    // Feature to be added later
-  };
-
   const handleAddButtonClick = async () => {
     if (Object.values(accounts).includes("")) {
       setAddButtonClicked(false);
@@ -75,7 +72,7 @@ export default function Home() {
         } else {
           toast.error(response.data.message)
         }
-      } catch (error) {
+      } catch {
         toast.error("Error adding accounts")
       } finally {
         setIsLoading(false)
@@ -85,6 +82,14 @@ export default function Home() {
 
   const handleEditButtonClick = () => {
     setAddButtonClicked(false);
+  }
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader2 className="w-10 h-10 animate-spin" />
+      </div>
+    );
   }
 
   return (
