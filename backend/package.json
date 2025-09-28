@@ -23,6 +23,7 @@
     "aws-cdk-lib": "^2.215.0",
     "constructs": "^10.4.2",
     "esbuild": "^0.25.10",
+    "marked": "^16.3.0",
     "mongodb": "^6.20.0",
     "node-fetch": "^3.3.2"
   }
