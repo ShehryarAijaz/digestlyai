@@ -23,11 +23,17 @@ export class BackendStack extends cdk.Stack {
       runtime: lambda.Runtime.NODEJS_LATEST,
       entry: path.join(__dirname, '..', 'lambda', 'sendEmail.ts'),
       handler: 'handler',
+      timeout: cdk.Duration.seconds(60),
+      environment: {
+        MONGO_URI: process.env.MONGO_URI!,
+        RESEND_API_KEY: process.env.RESEND_API_KEY!,
+        BASE_API_URL: process.env.BASE_API_URL!,
+      },
     });
 
     // 2. EventBridge Rule (cron job every minute for testing)
     const rule = new events.Rule(this, "SendEmailSchedule", {
-      schedule: events.Schedule.expression("cron(* * * * ? *)")
+      schedule: events.Schedule.expression("cron(*/5 * * * ? *)")
     });
 
     // 3. Attach Lambda as Target
