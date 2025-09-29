@@ -7,37 +7,37 @@ const reviews = [
     name: "Alex",
     username: "@alexdev",
     body: "The newsletter keeps me up-to-date with the latest developer news. Highly recommended!",
-    img: "https://avatar.vercel.sh/jack",
+    img: "/jack.png",
   },
   {
     name: "Priya",
     username: "@priyacodes",
     body: "I love how concise and relevant the updates are. No spam, just pure value.",
-    img: "https://avatar.vercel.sh/jill",
+    img: "/jill.png",
   },
   {
     name: "Sam",
     username: "@samueltech",
     body: "A must-have for any developer who wants to stay ahead in the community.",
-    img: "https://avatar.vercel.sh/john",
+    img: "/john.png",
   },
   {
     name: "Maria",
     username: "@maria_dev",
     body: "The best way to discover new tools and trends in the dev world. Delivered right to my inbox!",
-    img: "https://avatar.vercel.sh/jane",
+    img: "/jane.png",
   },
   {
     name: "Liam",
     username: "@liamjs",
     body: "I appreciate the curated content and the focus on quality over quantity.",
-    img: "https://avatar.vercel.sh/jenny",
+    img: "/jenny.png",
   },
   {
     name: "Sophie",
     username: "@sophiedev",
     body: "Finally, a newsletter that actually helps me grow as a developer. Thank you!",
-    img: "https://avatar.vercel.sh/james",
+    img: "/james.png",
   },
 ]
 

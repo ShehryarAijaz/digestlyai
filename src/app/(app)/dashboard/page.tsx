@@ -16,11 +16,17 @@ import { Loader2 } from "lucide-react";
 export default function Home() {
   const { data: session } = useSession();
 
-  const [accounts, setAccounts] = useState<{ [key: string]: string }>({
-    account1: "",
-    account2: "",
-    account3: "",
-  });
+
+  const accounts = {
+    account1: "elonmusk",
+    account2: "jack",
+    account3: "levelsio",
+  }
+  // const [accounts, setAccounts] = useState<{ [key: string]: string }>({
+  //   account1: "",
+  //   account2: "",
+  //   account3: "",
+  // });
   const [frequency, setFrequency] = useState<string>("Daily");
   const [topTweets, setTopTweets] = useState<boolean>(false);
   const [aiSummaries, setAiSummaries] = useState<boolean>(false);
@@ -31,11 +37,11 @@ export default function Home() {
     const fetchUserDetails = async () => {
       const response = await axios.get('/api/accounts')
       if (response.data.success) {
-        setAccounts({
-          account1: response.data.user.socialHandles.accounts[0],
-          account2: response.data.user.socialHandles.accounts[1],
-          account3: response.data.user.socialHandles.accounts[2],
-        })
+        // setAccounts({
+        //   account1: response.data.user.socialHandles.accounts[0],
+        //   account2: response.data.user.socialHandles.accounts[1],
+        //   account3: response.data.user.socialHandles.accounts[2],
+        // })
         setFrequency(response.data.user.frequency.charAt(0).toUpperCase() + response.data.user.frequency.slice(1))
         setAddButtonClicked(true)
       } else {
@@ -46,43 +52,43 @@ export default function Home() {
   }, [])
 
   // Helper to update a specific account value
-  const handleAccountInputChange = (account: string, value: string) => {
-    setAccounts((prev) => ({
-      ...prev,
-      [account]: value,
-    }));
-  };
+  // const handleAccountInputChange = (account: string, value: string) => {
+  //   setAccounts((prev) => ({
+  //     ...prev,
+  //     [account]: value,
+  //   }));
+  // };
 
-  const handleAddButtonClick = async () => {
-    if (Object.values(accounts).includes("")) {
-      setAddButtonClicked(false);
-      toast.error("Please add all accounts before clicking add");
-    } else {
-      setAddButtonClicked(true);
-      setIsLoading(true)
+  // const handleAddButtonClick = async () => {
+  //   if (Object.values(accounts).includes("")) {
+  //     setAddButtonClicked(false);
+  //     toast.error("Please add all accounts before clicking add");
+  //   } else {
+  //     setAddButtonClicked(true);
+  //     setIsLoading(true)
 
-      try {
-        const response = await axios.post(`/api/accounts`, {
-          account1: accounts.account1,
-          account2: accounts.account2,
-          account3: accounts.account3
-        })
-        if (response.data.success) {
-          toast.success(response.data.message)
-        } else {
-          toast.error(response.data.message)
-        }
-      } catch {
-        toast.error("Error adding accounts")
-      } finally {
-        setIsLoading(false)
-      }
-    }
-  };
+  //     try {
+  //       const response = await axios.post(`/api/accounts`, {
+  //         account1: accounts.account1,
+  //         account2: accounts.account2,
+  //         account3: accounts.account3
+  //       })
+  //       if (response.data.success) {
+  //         toast.success(response.data.message)
+  //       } else {
+  //         toast.error(response.data.message)
+  //       }
+  //     } catch {
+  //       toast.error("Error adding accounts")
+  //     } finally {
+  //       setIsLoading(false)
+  //     }
+  //   }
+  // };
 
-  const handleEditButtonClick = () => {
-    setAddButtonClicked(false);
-  }
+  // const handleEditButtonClick = () => {
+  //   setAddButtonClicked(false);
+  // }
 
   if (isLoading) {
     return (
@@ -99,7 +105,7 @@ export default function Home() {
         <p className="text-muted-foreground text-xl">Pick your accounts, choose schedule, and we&apos;ll handle the rest!</p>
       </div>
 
-      <div className="mt-8 border-b pb-5">
+      {/* <div className="mt-8 border-b pb-5">
         <h3 className="text-2xl font-semibold tracking-tight">Choose X Accounts</h3>
         <p className="leading-7 [&:not(:first-child)]:mt-1 text-muted-foreground">Add up to 3 accounts. Names should be accurate</p>
         <div className="flex flex-col gap-2 mt-2 w-full max-w-sm">
@@ -150,7 +156,7 @@ export default function Home() {
             </Button>
           )}
         </div>
-      </div>
+      </div> */}
 
       <Schedule frequency={frequency} setFrequency={setFrequency} />
 

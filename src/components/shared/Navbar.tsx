@@ -38,7 +38,13 @@ const Navbar = () => {
           <div className="flex items-center gap-3">  
             <Popover>
               <PopoverTrigger asChild>
-                <Image src={session?.user?.image as string} alt="User" className='h-8 w-8 rounded-full cursor-pointer hover:opacity-80 transition-all duration-300' />
+                <Image 
+                  src={session?.user?.image as string} 
+                  alt="User" 
+                  width={32}
+                  height={32}
+                  className='h-8 w-8 rounded-full cursor-pointer hover:opacity-80 transition-all duration-300' 
+                />
               </PopoverTrigger>
               <PopoverContent className="w-56">
                 <div className="p-2 flex flex-col">
